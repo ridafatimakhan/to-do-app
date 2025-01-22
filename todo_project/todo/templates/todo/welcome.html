@@ -1,0 +1,14 @@
+{% extends "todo/base.html" %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h1>Welcome to To-Do App</h1>
+    <p class="lead">Manage your tasks effortlessly.</p>
+    <div class="mt-4">
+        <a href="{% url 'login' %}" class="btn btn-primary btn-lg me-2">Login</a>
+        <a href="{% url 'signup' %}" class="btn btn-secondary btn-lg">Sign Up</a>
+    </div>
+</div>
+{% endblock %}
