@@ -17,5 +17,6 @@ urlpatterns = [
     path('add-task-guest/', views.add_task_guest, name='add_task_guest'),
     path('delete-task-guest/<int:task_index>/', views.delete_task_guest, name='delete_task_guest'),
     path('complete-task-guest/<int:task_index>/', views.complete_task_guest, name='complete_task_guest'),
+    path('api/tasks/', views.sync_tasks, name='sync_tasks'),
 
 ]

@@ -125,3 +125,18 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'todo/signup.html', {'form': form})
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+
+@csrf_exempt
+def sync_tasks(request):
+    if request.method == 'POST':
+        tasks_data = json.loads(request.body)
+        # Logic to save tasks to the database
+        for task in tasks_data:
+            # You can process the tasks here
+            pass
+        return JsonResponse({"status": "success", "message": "Tasks synced!"})
+
