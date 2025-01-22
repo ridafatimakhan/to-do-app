@@ -1,0 +1,56 @@
+{% extends "todo/base.html" %}
+{% load static %}
+
+{% block title %}Guest To-Do List{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Guest To-Do List</h1>
+
+{% if tasks %}
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Task</th>
+                <th>Category</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ task.name }}</td> <!-- Display Task Name -->
+                    <td>{{ task.category|capfirst }}</td> <!-- Display Category -->
+                    <td>{{ task.priority|capfirst }}</td> <!-- Display Priority -->
+                    <td>
+                        {% if task.completed %}
+                            <span class="badge bg-success">Completed</span>
+                        {% else %}
+                            <span class="badge bg-warning">Pending</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            <!-- Add Complete action if not completed -->
+                            {% if not task.completed %}
+                                <a href="{% url 'complete_task_guest' task_index=forloop.counter0 %}" class="btn btn-success btn-sm">Complete</a>
+                            {% endif %}
+                            <!-- Delete action -->
+                            <a href="{% url 'delete_task_guest' task_index=forloop.counter0 %}" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p class="text-muted">You have no tasks. Start by adding a new task!</p>
+{% endif %}
+
+<br>
+<a href="{% url 'add_task_guest' %}" class="btn btn-primary">Add a Task</a>
+
+{% endblock %}

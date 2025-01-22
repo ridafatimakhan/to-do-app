@@ -1,18 +1,34 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.models import Session
-
+from django.http import HttpResponse
 from .models import Task
 
 def welcome(request):
     return render(request, 'todo/welcome.html')
 
+
 def todo_list_guest(request):
-    # You can set up a temporary session for the guest user
-    request.session['guest_user'] = 'guest_user'  # Assign a guest user key to the session
-    return redirect('task_list')  # Redirect to the to-do list page
+    # Create a temporary session for the guest user (no need for authentication)
+    request.session['guest_user'] = 'guest_user'  # Set a flag indicating a guest user
+    
+    # Initialize a temporary task list for the guest user
+    if 'guest_tasks' not in request.session:
+        request.session['guest_tasks'] = []  # Initialize an empty list for guest tasks
+    
+    # Redirect the guest user to the to-do list page
+    return redirect('task_list_guest')  # Redirect to the task list page for guests
+
+def task_list_guest(request):
+    # Get the guest user tasks from the session
+    guest_tasks = request.session.get('guest_tasks', [])
+    
+    # Optionally, you can also handle filtering logic similar to the authenticated user
+    
+    return render(request, 'todo/task_list_guest.html', {'tasks': guest_tasks})
 
 @login_required
 def task_list(request):
@@ -31,6 +47,50 @@ def task_list(request):
     return render(request, 'todo/task_list.html', {'tasks': tasks})
 
 
+
+
+def add_task_guest(request):
+    if request.method == 'POST':
+        task_name = request.POST['task_name']
+        category = request.POST['category']
+        priority = request.POST['priority']
+        
+        task = {'name': task_name, 'category': category, 'priority': priority}
+        
+        guest_tasks = request.session.get('guest_tasks', [])
+        guest_tasks.append(task)
+        
+        request.session['guest_tasks'] = guest_tasks
+        
+        return redirect('task_list_guest')
+    else:
+        return render(request, 'todo/add_task_guest.html')
+
+
+def delete_task_guest(request, task_index):
+    # Fetch tasks from the session
+    guest_tasks = request.session.get('guest_tasks', [])
+
+    # Check if the task_index is valid
+    if 0 <= task_index < len(guest_tasks):
+        del guest_tasks[task_index]  # Delete the task at the provided index
+    
+    # Save the updated tasks back to the session
+    request.session['guest_tasks'] = guest_tasks
+    
+    # Redirect to the task list page
+    return redirect('task_list_guest')
+
+def complete_task_guest(request, task_index):
+    # You can find the task based on the index (or use another identifier if needed)
+    tasks = request.session.get('guest_tasks', [])
+    if tasks:
+        task = tasks[task_index]
+        task['completed'] = True  # Set the task as completed
+        # Save the updated list of tasks back to the session
+        request.session['guest_tasks'] = tasks
+    return redirect('task_list_guest')
+    
 @login_required
 def add_task(request):
     if request.method == 'POST':
