@@ -12,6 +12,8 @@
             <tr>
                 <th>#</th>
                 <th>Task</th>
+                <th>Category</th>
+                <th>Priority</th>
                 <th>Status</th>
                 <th>Actions</th>
             </tr>
@@ -21,6 +23,8 @@
                 <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ task.title }}</td>
+                    <td>{{ task.category|capfirst }}</td> <!-- Display Category -->
+                    <td>{{ task.priority|capfirst }}</td> <!-- Display Priority -->
                     <td>
                         {% if task.completed %}
                             <span class="badge bg-success">Completed</span>
@@ -43,6 +47,6 @@
 {% else %}
     <p class="text-muted">No tasks available. Start by adding a new task!</p>
 {% endif %}
-
+<br>
 <a href="{% url 'add_task' %}" class="btn btn-primary">Add a Task</a>
 {% endblock %}

@@ -1,0 +1,68 @@
+/* dark_mode.css */
+body {
+    background-color: #121212;
+    color: #bb86fc; /* Purple for the main text color */
+}
+
+.navbar {
+    background-color: #3f2d5f;
+}
+.navbar-brand{
+    color: #bb86fc;
+}
+.table-dark {
+    background-color: #3f2d5f;
+}
+.btn {
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    text-decoration: none;
+    display: inline-block;
+}
+.btn {
+    background-color: #666;
+    color: #bb86fc; /* Purple for button text */
+}
+/* dark_mode.css */
+.btn-success {
+    background-color: #236b36; /* Darker green for success button */
+    color: #D3D3D3; /* Light gray */
+}
+
+.btn-danger {
+    background-color: #8b2d3b; /* Darker red for danger button */
+    color: #D3D3D3; /* Light gray */
+}
+
+/* Optional hover effects for better interactivity */
+.btn-success:hover {
+    background-color: #1e5930; /* Slightly darker green on hover */
+}
+
+.btn-danger:hover {
+    background-color: #73232e; /* Slightly darker red on hover */
+}
+
+.btn-outline-light {
+    border: 1px solid #bb86fc; /* Purple border for outline buttons */
+    color: #bb86fc; /* Purple text for outline buttons */
+}
+
+.badge {
+    background-color: #3f2d5f; /* Background for badges */
+    color: #bb86fc; /* Purple text for badges */
+}
+
+a {
+    color: #bb86fc; /* Purple for links */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #bb86fc; /* Purple for headings */
+}
+
+table th, table td {
+    color: #bb86fc; 
+}
+

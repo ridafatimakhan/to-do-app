@@ -127,3 +127,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'login'  # URL to redirect unauthenticated users
 LOGIN_REDIRECT_URL = 'task_list'  # URL to redirect users after successful login
 LOGOUT_REDIRECT_URL = 'welcome'  # Optional: where to redirect users after logout
+STATIC_ROOT = BASE_DIR / "staticfiles"
