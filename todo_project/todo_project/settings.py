@@ -123,3 +123,7 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Authentication settings
+LOGIN_URL = 'login'  # URL to redirect unauthenticated users
+LOGIN_REDIRECT_URL = 'task_list'  # URL to redirect users after successful login
+LOGOUT_REDIRECT_URL = 'welcome'  # Optional: where to redirect users after logout
