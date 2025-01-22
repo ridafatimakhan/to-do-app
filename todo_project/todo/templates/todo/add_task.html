@@ -1,0 +1,17 @@
+{% extends "todo/base.html" %}
+
+{% block title %}Add Task{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Add a New Task</h1>
+    <form method="post" class="form-inline">
+        {% csrf_token %}
+        <div class="mb-3">
+            <input type="text" name="title" class="form-control" placeholder="Task Title" required>
+        </div>
+        <button type="submit" class="btn btn-success">Add Task</button>
+    </form>
+    <a href="{% url 'task_list' %}" class="btn btn-secondary mt-3">Back to List</a>
+</div>
+{% endblock %}
