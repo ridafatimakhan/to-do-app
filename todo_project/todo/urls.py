@@ -19,4 +19,5 @@ urlpatterns = [
     path('complete-task-guest/<int:task_index>/', views.complete_task_guest, name='complete_task_guest'),
     path('api/tasks/', views.sync_tasks, name='sync_tasks'),
 
+
 ]
